@@ -19,6 +19,13 @@ function generateAlphabet() {
     return alphabet;
 };
 
+function generateScore() {
+    winsText.textContent = "wins: " + wins;
+    lossesText.textContent = "Losses: " + losses;
+    guessesLeftText.textContent = "Guesses Left " + guessesLeft;
+    letterSoFarText.textContent = "You have guessed " + keysPressed;
+};
+
 document.onkeyup = function (e) {
 
     var userGuess = e.key.toLocaleLowerCase();
@@ -27,6 +34,10 @@ document.onkeyup = function (e) {
 
     var keysPressed = [];
 
+    if (guessesLeft === 0) {
+        return;
+    }
+
     if (keysPressed.indexOf(e.key) === -1) {
         keysPressed.push(e.key);
 
@@ -34,12 +45,8 @@ document.onkeyup = function (e) {
             wins++;
         } else {
             losses++;
-            guessesLeft--;
         }
-
-        winsText.textContent = "wins: " + wins;
-        lossesText.textContent = "Losses: " + losses;
-        guessesLeftText.textContent = "Guesses Left " + guessesLeft;
-        letterSoFarText.textContent = "You have guessed " + keysPressed;
+        guessesLeft--;
+        generateScore();
     }
 };
