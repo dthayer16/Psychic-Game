@@ -4,6 +4,8 @@ var losses = 0;
 
 var guessesLeft = 9;
 
+var keysPressed = [];
+
 var winsText = document.getElementById("winText");
 var lossesText = document.getElementById("lossText");
 var guessesLeftText = document.getElementById("guessesText");
@@ -26,13 +28,12 @@ function generateScore() {
     letterSoFarText.textContent = "You have guessed " + keysPressed;
 };
 
+var computerGuess = generateAlphabet(Math.floor(Math.random() * generateAlphabet.length));
+
 document.onkeyup = function (e) {
 
     var userGuess = e.key.toLocaleLowerCase();
 
-    var computerGuess = generateAlphabet(Math.floor(Math.random() * generateAlphabet.length));
-
-    var keysPressed = [];
 
     if (guessesLeft === 0) {
         return;
@@ -46,7 +47,9 @@ document.onkeyup = function (e) {
         } else {
             losses++;
         }
-        guessesLeft--;
+        guessesLeft--;  
         generateScore();
     }
 };
+
+
